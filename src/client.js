@@ -343,6 +343,26 @@ class ResoNetLib extends EventEmitter {
         // TODO: finish implementing this function
         this.error("Not implemented yet.")
     }
+
+    async fetchMessages(userId, maxItems = 50, unreadOnly = false) {
+        const fromTime = new Date(2016, 0, 1).toISOString();
+        const res = await fetch(`${this.data.api}/users/${this.data.userId}/messages?maxItems=${maxItems}&user=${userId}&maxItems=${maxItems}&fromTime=${fromTime}&unread=${unreadOnly}`, 
+        {
+            method: "GET",
+            headers: { 
+                "Authorization": this.data.fullToken 
+            } 
+        }).catch(async (error) => {
+            this.error(error);
+            return null;
+        });
+
+        if (res.ok) {
+            let json = await res.json();      
+            return json;
+        }
+        return null;
+    }
     //#endregion
 
     //#region Session related things 
