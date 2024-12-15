@@ -387,7 +387,7 @@ class ResoNetLib extends EventEmitter {
     // Formats image urls to be usable 
     formatIconUrl(url) {
         try {
-            return url.replace('resdb:///', this.data.ASSET_URL).replace('.webp', '').replace('.png', '');
+            return url.replace('resdb:///', this.data.assetUrl).replace('.webp', '').replace('.png', '');
         }
         catch {
             return 'INVALID_URL';
