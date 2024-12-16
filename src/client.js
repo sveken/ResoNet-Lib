@@ -204,6 +204,8 @@ class ResoNetLib extends EventEmitter {
         await this.signalRConnection.send("SendMessage", messageData).catch(async (error) => {
             this.error(error);
         });
+
+        return messageData;
     }
     
     async setupVariables() {
@@ -344,7 +346,7 @@ class ResoNetLib extends EventEmitter {
         this.error("Not implemented yet.")
     }
 
-    async fetchMessages(userId, maxItems = 50, unreadOnly = false) {
+    async fetchMessages(userId, maxItems = 100, unreadOnly = false) {
         const fromTime = new Date(2016, 0, 1).toISOString();
         const res = await fetch(`${this.data.api}/users/${this.data.userId}/messages?maxItems=${maxItems}&user=${userId}&maxItems=${maxItems}&fromTime=${fromTime}&unread=${unreadOnly}`, 
         {
