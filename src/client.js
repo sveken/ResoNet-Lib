@@ -164,8 +164,18 @@ class ResoNetLib extends EventEmitter {
 
         this.signalRConnection.on("ReceiveMessage", async (message) => {
             this.emit("messageRecieveEvent", message);
-        });
 
+            /*
+            let readMessageData = {
+                "senderId": message.senderId,
+                "readTime": (new Date(Date.now())).toISOString(),
+                "ids": [
+                    message.id
+                ]
+            }
+            await this.signalRConnection.send("MarkMessagesRead", readMessageData);
+            */
+        });
         this.signalRConnection.start();
     }
     
